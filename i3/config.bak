@@ -113,7 +113,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logout ?' -B 'Yes !' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Logout ?' -B 'Yes !' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -154,30 +154,17 @@ exec --no-startup-id dunst
 default_border pixel 0
 default_floating_border pixel 0
 
-bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-2/powermenu.sh
+bindsym $mod+Shift+p exec ~/.config/rofi/powermenu/type-2/powermenu.sh
 bindsym $mod+p exec --no-startup-id ~/scripts/fuzzy.sh
-bindsym $mod+Shift+s exec scrot --select --line mode=edge
-bindsym $mod+Print exec ~/scripts/screenshot.sh window
-
+bindsym $mod+Print exec "~/scripts/screenshot.sh window"
+bindsym $mod+Shift+Print exec "~/scripts/screenshot.sh select"
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/scripts/volbri.sh brightness_up
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/scripts/volbri.sh brightness_down
-
 bindsym $mod+Mod2+KP_0 exec --no-startup-id playerctl play-pause
 bindsym $mod+KP_Add exec --no-startup-id playerctl next
 bindsym $mod+KP_Subtract exec --no-startup-id playerctl prev
 
-## Screenshots
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date --iso-8601=seconds)"
-# bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date --iso-8601=seconds)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date --iso-8601=seconds)"
-
-## Clipboard Screenshots
-bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
-bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
-
-assign [class="Google-chrome" instance="google-chrome"] $ws1
+assign [class="Google-chrome"] $ws1
 assign [class="Code"] $ws2
-assign [class="Google-chrome" instance="crx_hnpfjngllnobngcgfapefoaidbinmjnm"] $ws10
 
 # exec_always picom -f
