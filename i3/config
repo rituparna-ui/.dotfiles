@@ -6,6 +6,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet &
+exec --no-startup-id picom &
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -55,9 +56,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+bindsym $mod+s layout toggle split
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -151,6 +152,8 @@ exec_always --no-startup-id feh --bg-fill --randomize ~/wallpapers/*
 # exec_always ~/.config/polybar/launch.sh --material
 exec_always --no-startup-id ~/.config/polybar/launch
 exec --no-startup-id dunst
+exec --no-startup-id discord
+
 default_border pixel 0
 default_floating_border pixel 0
 
@@ -164,20 +167,27 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/scripts/volbri.sh brightnes
 
 bindsym $mod+Mod2+KP_0 exec --no-startup-id playerctl play-pause
 bindsym $mod+KP_Add exec --no-startup-id playerctl next
-bindsym $mod+KP_Subtract exec --no-startup-id playerctl prev
-
+bindsym $mod+KP_Subtract exec --no-startup-id playerctl previous
+bindsym Ctrl+Escape exec wezterm -e htop
 ## Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date --iso-8601=seconds)"
 # bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date --iso-8601=seconds)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date --iso-8601=seconds)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date --iso-8601=seconds).jpg"
+bindsym $mod+t exec --no-startup-id eww open powermenu
 
 ## Clipboard Screenshots
 bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
 bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
+bindsym $mod+e exec --no-startup-id pcmanfm
+bindsym $mod+period exec --no-startup-id rofi -modi emoji -show emoji
+
 assign [class="Google-chrome" instance="google-chrome"] $ws1
 assign [class="Code"] $ws2
+assign [class="vlc"] $ws3
+assign [class="discord"] $ws9
 assign [class="Google-chrome" instance="crx_hnpfjngllnobngcgfapefoaidbinmjnm"] $ws10
+assign [class="Google-chrome" instance="crx_kippjfofjhjlffjecoapiogbkgbpmgej"] $ws8
 
 # exec_always picom -f
