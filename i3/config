@@ -148,11 +148,13 @@ bindsym $mod+r mode "resize"
 #         status_command i3status
 # }
 
-exec_always --no-startup-id feh --bg-fill --randomize ~/wallpapers/*
+# exec_always --no-startup-id feh --bg-fill --randomize ~/wallpapers/*
+exec_always --no-startup-id feh --bg-fill ~/wallpapers/img19.png
 # exec_always ~/.config/polybar/launch.sh --material
 exec_always --no-startup-id ~/.config/polybar/launch
 exec --no-startup-id dunst
 exec --no-startup-id discord
+exec --no-startup-id ~/scripts/acpi.sh
 
 default_border pixel 0
 default_floating_border pixel 0
@@ -182,6 +184,7 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 
 bindsym $mod+e exec --no-startup-id pcmanfm
 bindsym $mod+period exec --no-startup-id rofi -modi emoji -show emoji
+bindsym $mod+semicolon exec --no-startup-id ~/scripts/glyphs.sh
 
 assign [class="Google-chrome" instance="google-chrome"] $ws1
 assign [class="Code"] $ws2
