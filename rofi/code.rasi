@@ -1,0 +1,17 @@
+* {
+  font: "JetBrainsMono Nerd Font Mono";
+  /* background-color: @bg-col;
+  text-color: @fg-col; */
+}
+
+window {
+  width: 15em;
+  padding: 1em;
+  location: center;
+}
+
+entry {
+  expand: true;
+  width: 5em;
+  /*; text-color: @fg-col2;*/
+}

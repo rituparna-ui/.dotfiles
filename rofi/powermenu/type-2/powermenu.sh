@@ -107,5 +107,6 @@ case ${chosen} in
         ;;
     $logout)
 		run_cmd --logout
+		# i3-msg exit
         ;;
 esac

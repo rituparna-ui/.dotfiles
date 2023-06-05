@@ -1,0 +1,123 @@
+# terminal emulator
+super + Return
+    wezterm
+
+# program launcher
+super + d
+    ~/.config/rofi/launchers/type-7/launcher.sh
+
+# make sxhkd reload its configuration files:
+super + Escape
+    pkill -USR1 -x sxhkd
+
+
+#
+# bspwm hotkeys
+#
+
+# powermenu
+super + shift + e
+    ~/.config/rofi/powermenu/type-2/powermenu.sh
+
+# restart bspwm
+super + shift + r
+    bspc wm -r
+
+# close window
+super + shift + q
+    bspc node -c
+
+# focus the last node/desktop
+super + {grave,Tab}
+    bspc {node,desktop} -f last
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+        bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+        bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+        bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#
+# Custom Keybindings
+#
+
+# volume/mic
+XF86AudioRaiseVolume
+    ~/scripts/volbri.sh volume_up
+
+XF86AudioLowerVolume
+    ~/scripts/volbri.sh volume_down
+
+XF86AudioMute
+    ~/scripts/volbri.sh volume_mute
+
+XF86AudioMicMute
+    ~/scripts/volbri.sh mic_toggle
+
+# lock
+super + p
+    ~/scripts/fuzzy.sh
+
+# brightness
+XF86MonBrightnessUp
+    ~/scripts/volbri.sh brightness_up
+
+XF86MonBrightnessDown
+    ~/scripts/volbri.sh brightness_down
+
+# music controls
+super + KP_Insert
+    playerctl play-pause
+
+super + KP_Add
+    playerctl next
+
+super + KP_Subtract
+    playerctl previous
+
+# htop
+ctrl + Escape
+    wezterm -e htop
+
+super + period
+    rofi -modi emoji -show emoji
+
+super + e
+    pcmanfm
+
+#
+# Screenshots
+#
+
+# Screenshot window and save
+Print
+    maim "/home/$USER/Pictures/Screenshots/$(date --iso-8601=seconds).png"
+
+# Screenshot selection and save
+shift + Print
+    maim --select "/home/$USER/Pictures/Screenshots/$(date --iso-8601=seconds).png"
+
+# Screenshot selection and copy to clipboard
+super + shift + s
+    maim --select | xclip -selection clipboard -t image/png
+
+super + shift + @space
+    if [ -z "$(bspc query -N -n focused.floating)" ]; then \
+        bspc node focused -t floating; \
+    else \
+        bspc node focused -t tiled; \
+    fi
